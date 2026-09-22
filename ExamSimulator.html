@@ -1,421 +1,982 @@
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset='UTF-8'>
-<title>Exam Simulator</title>
-<style>
-	body{font-family:Arial;max-width:1000px;margin:20px auto;padding:20px;background:#f5f5f5}
-	.container{background:#fff;padding:20px;border-radius:10px}
-	button{padding:10px;margin:5px}
-	.option{display:block;width:100%;text-align:left;border:1px solid #ccc}
-	.correct{background:#c8f7c5}
-	.wrong{background:#ffcdd2}
-</style>
-</head>
-<body>
-	<div class='container'>
-		<h2>Exam Simulator (Offline)</h2>
-		<button onclick='startExam()'>Load Questions</button>
-		<div id='examArea' style='display:none'>
-			<p id='score'></p>
-			<h3 id='question'></h3>
-			<div id='options'></div>
-			<div id='explanation'></div>
-			<button onclick='prevQuestion()'>Previous</button>
-			<button onclick='nextQuestion()'>Next</button>
-		</div>
-	</div>
 
+
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset='UTF-8'>
+
+<title>Exam Simulator</title>
+
+<style>
+
+ 
+
+*{
+
+    margin:0;
+
+    padding:0;
+
+    box-sizing:border-box;
+
+}
+
+ 
+
+body{
+
+    font-family:'Segoe UI',Arial,sans-serif;
+
+    background:#caf0f8;
+
+    color:#023047;
+
+    max-width:1000px;
+
+    margin:auto;
+
+    padding:15px;
+
+}
+
+ 
+
+.container{
+
+    background:#ffffff;
+
+    border-radius:15px;
+
+    padding:20px;
+
+    box-shadow:0 4px 15px rgba(0,119,182,.15);
+
+}
+
+ 
+
+h2{
+
+    background:#48cae4;
+
+    color:#023047;
+
+    padding:15px;
+
+    text-align:center;
+
+    border-radius:10px;
+
+    margin-bottom:15px;
+
+}
+
+ 
+
+#score{
+
+    background:#90e0ef;
+
+    padding:12px;
+
+    border-radius:8px;
+
+    font-weight:bold;
+
+    font-size:17px;
+
+    margin-bottom:15px;
+
+}
+
+ 
+
+#question{
+
+    background:#ade8f4;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:15px;
+
+    font-size:18px;
+
+    line-height:1.6;
+
+    font-weight:600;
+
+}
+
+ 
+
+.option{
+
+    display:block;
+
+    width:100%;
+
+    text-align:left;
+
+    padding:14px;
+
+    margin:8px 0;
+
+    border:2px solid #48cae4;
+
+    border-radius:10px;
+
+    background:#ffffff;
+
+    color:#023047;
+
+    cursor:pointer;
+
+    font-size:16px;
+
+    transition:.3s;
+
+}
+
+ 
+
+.option:hover{
+
+    background:#ade8f4;
+
+    transform:translateX(3px);
+
+}
+
+ 
+
+button{
+
+    background:#0077b6;
+
+    color:white;
+
+    border:none;
+
+    border-radius:8px;
+
+    padding:12px 18px;
+
+    margin:5px;
+
+    cursor:pointer;
+
+    font-size:15px;
+
+    font-weight:600;
+
+}
+
+ 
+
+button:hover{
+
+    background:#0096c7;
+
+}
+
+ 
+
+.correct{
+
+    background:#c7f9cc !important;
+
+    border-color:#2d6a4f !important;
+
+    color:#1b4332;
+
+}
+
+ 
+
+.wrong{
+
+    background:#ffd6d6 !important;
+
+    border-color:#d90429 !important;
+
+    color:#9d0208;
+
+}
+
+ 
+
+#explanation{
+
+    background:#ffffff;
+
+    margin-top:15px;
+
+    padding:15px;
+
+    border-left:5px solid #0077b6;
+
+    border-radius:10px;
+
+    line-height:1.6;
+
+}
+
+ 
+
+#reviewArea{
+
+    margin-top:20px;
+
+}
+
+ 
+
+.review-card{
+
+    background:#ade8f4;
+
+    padding:15px;
+
+    border-radius:10px;
+
+    margin-bottom:12px;
+
+    border:1px solid #48cae4;
+
+}
+
+ 
+
+.review-card p{
+
+    margin:5px 0;
+
+}
+
+ 
+
+hr{
+
+    border:none;
+
+    border-top:1px solid #48cae4;
+
+    margin-top:10px;
+
+}
+
+ 
+
+@media(max-width:768px){
+
+ 
+
+    body{
+
+        padding:10px;
+
+    }
+
+ 
+
+    .container{
+
+        padding:15px;
+
+    }
+
+ 
+
+    h2{
+
+        font-size:20px;
+
+    }
+
+ 
+
+    #question{
+
+        font-size:16px;
+
+    }
+
+ 
+
+    .option{
+
+        font-size:15px;
+
+        padding:12px;
+
+    }
+
+ 
+
+    button{
+
+        width:100%;
+
+        margin:6px 0;
+
+    }
+
+ 
+
+    #score{
+
+        font-size:16px;
+
+    }
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+            <div class='container'>
+
+                        <h2>Exam Simulator (Offline)</h2>
+
+                        <button onclick='startExam()'>Load Questions</button>
+
+                        <div id='examArea' style='display:none'>
+
+                                    <p id='score'></p>
+
+                                    <h3 id='question'></h3>
+
+                                    <div id='options'></div>
+
+                                    <div id='explanation'></div>
+
+                                    <button onclick='prevQuestion()'>Previous</button>
+
+                                    <button onclick='nextQuestion()'>Next</button>
+
+                        </div>
+
+            </div>
+
+ 
+
+ 
 
 <button onclick="reviewWrongQuestions()">Review Wrong Questions</button>
+
 <button onclick="reviewSkippedQuestions()">Review Not Answered</button>
+
 <button onclick="reviewMistakes()">Review All Mistakes</button>
+
 <div id="reviewArea"></div>
+
+<!-- Load questions first -->
+
+<script src="questions.js"></script>
+
+<!-- Then load your exam code -->
 
 <script>
 
 let currentQuestion = 0;
+
 let currentScore = 0;
+
 let answered = {};
+
 let userAnswers = [];
 
-const questions = [
-
-
-
-{
-    Question: "An aggressive investor generally prefers?",
-    A: "Liquid Funds",
-    B: "Equity Funds",
-    C: "Overnight Funds",
-    D: "Arbitrage Funds only",
-    CorrectAns: "B",
-    Explanation: "Aggressive investors seek higher returns through equities."
-},{
-    Question: "Benchmark index helps in?",
-    A: "Paying dividends",
-    B: "Comparing performance",
-    C: "Calculating tax",
-    D: "Computing expense ratio",
-    CorrectAns: "B",
-    Explanation: "Benchmark evaluates fund performance."
-},{
-    Question: "Closed-ended funds can be redeemed?",
-    A: "Anytime",
-    B: "At maturity",
-    C: "Weekly",
-    D: "Monthly",
-    CorrectAns: "B",
-    Explanation: "Closed-ended funds are redeemed on maturity."
-},{
-    Question: "Credit Risk refers to?",
-    A: "Market fall",
-    B: "Issuer default",
-    C: "Inflation rise",
-    D: "Exchange fluctuations",
-    CorrectAns: "B",
-    Explanation: "Credit risk arises when issuer fails to repay obligations."
-},{
-    Question: "Debt funds primarily invest in?",
-    A: "Equities",
-    B: "Real Estate",
-    C: "Fixed Income Securities",
-    D: "Gold",
-    CorrectAns: "C",
-    Explanation: "Debt funds invest in bonds, debentures and money market instruments."
-},{
-    Question: "ELSS has a lock-in period of?",
-    A: "1 year",
-    B: "2 years",
-    C: "3 years",
-    D: "5 years",
-    CorrectAns: "C",
-    Explanation: "ELSS has the shortest lock-in among Section 80C options."
-},{
-    Question: "ELSS mainly invests in?",
-    A: "Gold",
-    B: "Debt",
-    C: "Real Estate",
-    D: "Equity",
-    CorrectAns: "D",
-    Explanation: "ELSS is an equity-oriented tax-saving scheme."
-},{
-    Question: "Entry Load on mutual funds is?",
-    A: "Mandatory",
-    B: "Allowed only for debt funds",
-    C: "Not permitted",
-    D: "0.1",
-    CorrectAns: "C",
-    Explanation: "SEBI abolished entry load in mutual funds."
-},{
-    Question: "ETF units are traded on?",
-    A: "Bank branches",
-    B: "Stock exchanges",
-    C: "AMC offices only",
-    D: "Post offices",
-    CorrectAns: "B",
-    Explanation: "ETF units are bought and sold on exchanges."
-},{
-    Question: "Exit Load is charged when?",
-    A: "Investing",
-    B: "Redeeming before specified period",
-    C: "Switching bank account",
-    D: "Opening folio",
-    CorrectAns: "B",
-    Explanation: "Exit load discourages early redemption."
-}
-
-
-
-
-
-];
+ 
 
 function updateScore()
+
 {
+
     document.getElementById("score").innerHTML =
+
         "Score: " +
+
         currentScore +
+
         "/" +
+
         questions.length;
+
 }
 
+ 
+
 function startExam()
+
 {
+
     for(let i = questions.length - 1; i > 0; i--)
+
     {
+
         const j =
+
             Math.floor(
+
                 Math.random() * (i + 1)
+
             );
 
+ 
+
         [questions[i], questions[j]] =
+
         [questions[j], questions[i]];
+
     }
 
+ 
+
     currentQuestion = 0;
+
     currentScore = 0;
+
     answered = {};
+
     userAnswers = [];
 
+ 
+
     document.getElementById("examArea").style.display =
+
         "block";
+
+ 
 
     updateScore();
 
+ 
+
     showQuestion();
+
 }
 
+ 
+
 function showQuestion()
+
 {
+
     let q = questions[currentQuestion];
 
+ 
+
     document.getElementById("question").innerHTML =
+
         "Q" +
+
         (currentQuestion + 1) +
+
         ". " +
+
         q.Question;
+
+ 
 
     document.getElementById("options").innerHTML = "";
 
+ 
+
     document.getElementById("explanation").innerHTML = "";
 
+ 
+
     ["A","B","C","D"].forEach(option =>
+
     {
+
         let btn =
+
             document.createElement("button");
+
+ 
 
         btn.className = "option";
 
+ 
+
         btn.innerHTML =
+
             option +
+
             ". " +
+
             q[option];
 
+ 
+
         btn.onclick = function()
+
         {
+
             selectAnswer(
+
                 option,
+
                 btn
+
             );
+
         };
 
+ 
+
         document
+
             .getElementById("options")
+
             .appendChild(btn);
+
     });
 
+ 
+
     updateScore();
+
 }
 
+ 
+
 function selectAnswer(answer, button)
+
 {
+
     if(answered[currentQuestion])
+
         return;
+
+ 
 
     answered[currentQuestion] = true;
 
+ 
+
     userAnswers[currentQuestion] =
+
         answer;
 
+ 
+
     let q =
+
         questions[currentQuestion];
 
+ 
+
     document
+
         .querySelectorAll(".option")
+
         .forEach(btn =>
+
         {
+
             btn.disabled = true;
+
         });
 
+ 
+
     if(answer === q.CorrectAns)
+
     {
+
         currentScore++;
 
+ 
+
         button.classList.add(
+
             "correct"
-        );
-    }
-    else
-    {
-        button.classList.add(
-            "wrong"
+
         );
 
-        document
-            .querySelectorAll(".option")
-            .forEach(btn =>
-            {
-                if(
-                    btn.innerText.startsWith(
-                        q.CorrectAns + "."
-                    )
-                )
-                {
-                    btn.classList.add(
-                        "correct"
-                    );
-                }
-            });
     }
+
+    else
+
+    {
+
+        button.classList.add(
+
+            "wrong"
+
+        );
+
+ 
+
+        document
+
+            .querySelectorAll(".option")
+
+            .forEach(btn =>
+
+            {
+
+                if(
+
+                    btn.innerText.startsWith(
+
+                        q.CorrectAns + "."
+
+                    )
+
+                )
+
+                {
+
+                    btn.classList.add(
+
+                        "correct"
+
+                   );
+
+                }
+
+            });
+
+    }
+
+ 
 
     updateScore();
 
+ 
+
     document.getElementById(
+
         "explanation"
+
     ).innerHTML =
+
     "<b>Correct Answer:</b> " +
+
     q.CorrectAns +
+
     "<br><b>Explanation:</b> " +
+
     q.Explanation;
+
 }
+
+ 
 
 function nextQuestion()
+
 {
+
     if(
+
         currentQuestion <
+
         questions.length - 1
+
     )
+
     {
+
         currentQuestion++;
 
+ 
+
         showQuestion();
+
     }
+
     else
+
     {
+
         alert(
+
             "Exam Finished!\n\nScore: " +
+
             currentScore +
+
             "/" +
+
             questions.length
+
         );
+
     }
+
 }
+
+ 
 
 function prevQuestion()
+
 {
+
     if(currentQuestion > 0)
+
     {
+
         currentQuestion--;
 
+ 
+
         showQuestion();
+
     }
+
 }
+
+ 
 
 function reviewWrongQuestions()
+
 {
+
     let html =
+
         "<h2>Wrong Questions</h2>";
 
+ 
+
     questions.forEach(
+
         (q,index) =>
+
     {
+
         if(
+
             userAnswers[index] &&
+
             userAnswers[index] !==
+
             q.CorrectAns
+
         )
+
         {
+
             html += `
+
             <div>
+
                 <h4>Q${index+1}. ${q.Question}</h4>
+
                 <p style="color:red">
+
                     Your Answer:
+
                     ${userAnswers[index]}
+
                 </p>
+
                 <p style="color:green">
+
                     Correct Answer:
+
                     ${q.CorrectAns}
+
                 </p>
+
                 <p>
+
                     ${q.Explanation}
+
                 </p>
+
                 <hr>
+
             </div>`;
+
         }
+
     });
 
+ 
+
     document.getElementById(
+
         "reviewArea"
+
     ).innerHTML = html;
+
 }
+
+ 
 
 function reviewSkippedQuestions()
+
 {
+
     let html =
+
         "<h2>Not Answered Questions</h2>";
 
+ 
+
     questions.forEach(
+
         (q,index) =>
+
     {
+
         if(!userAnswers[index])
+
         {
+
             html += `
+
             <div>
+
                 <h4>Q${index+1}. ${q.Question}</h4>
+
                 <p style="color:orange">
+
                     Not Answered
+
                 </p>
+
                 <p style="color:green">
+
                     Correct Answer:
+
                     ${q.CorrectAns}
+
                 </p>
+
                 <p>
+
                     ${q.Explanation}
+
                 </p>
+
                 <hr>
+
             </div>`;
+
         }
+
     });
 
+ 
+
     document.getElementById(
+
         "reviewArea"
+
     ).innerHTML = html;
+
 }
+
+ 
 
 function reviewMistakes()
+
 {
+
     let html =
+
         "<h2>Questions To Revise</h2>";
 
+ 
+
     questions.forEach(
+
         (q,index) =>
+
     {
+
         if(
+
             !userAnswers[index] ||
+
             userAnswers[index] !==
+
             q.CorrectAns
+
         )
+
         {
+
             html += `
+
             <div>
+
                 <h4>Q${index+1}. ${q.Question}</h4>
+
                 <p>
+
                     Your Answer:
+
                     ${
+
                         userAnswers[index]
+
                         || "Not Answered"
+
                     }
+
                 </p>
+
                 <p>
+
                     Correct Answer:
+
                     ${q.CorrectAns}
+
                 </p>
+
                 <p>
+
                     ${q.Explanation}
+
                 </p>
+
                 <hr>
+
             </div>`;
+
         }
+
     });
 
+ 
+
     document.getElementById(
+
         "reviewArea"
+
     ).innerHTML = html;
+
 }
 
+ 
+
 window.onload = startExam;
+
 </script>
 
+ 
+
+ 
 
 </body></html>
+
+ 
+
+ 
+
+ 
+
+ 
+
