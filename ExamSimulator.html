@@ -336,7 +336,14 @@ hr{
     }
 
 }
-
+.nav-buttons{
+ display:flex;
+ gap:10px;
+ margin-top:15px;
+ margin-bottom:25px;
+}
+ .nav-buttons button{flex:1;}
+ 
 </style>
 
 </head>
@@ -358,12 +365,13 @@ hr{
                                     <div id='options'></div>
 
                                     <div id='explanation'></div>
+                         <div class="nav-buttons">
 
                                     <button onclick='prevQuestion()'>Previous</button>
 
                                     <button onclick='nextQuestion()'>Next</button>
 
-                        </div>
+                        </div></div>
 
             </div>
 
