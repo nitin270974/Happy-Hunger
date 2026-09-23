@@ -207,9 +207,7 @@ const SET10=[
     D: "Liquid fund",
     CorrectAns: "A",
     Explanation: "Small-cap funds generally carry higher volatility than debt and large-cap funds."
-},"
-
-"{
+},{
     Question: "Which document includes commentary on the current state of the economy and markets?",
     A: "SAI",
     B: "Fund Fact Sheet",
