@@ -1,0 +1,26 @@
+.menu{
+   
+    padding:10px;
+   
+    overflow:auto;
+}
+.menu a{
+    display:block;
+    padding:10px;
+    margin:5px 0;
+    background:#0077b6;
+    color:white;
+    text-decoration:none;
+    border-radius:8px;
+}
+.menu a:hover{
+    background:#023e8a;
+}
+.viewer{
+    flex:1;
+}
+#pdfFrame{
+    width:100%;
+    height:100vh;
+    border:none;
+}

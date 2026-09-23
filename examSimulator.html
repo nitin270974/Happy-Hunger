@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Simulator</title>
+<link rel="stylesheet" href="site.css"/>
+<link rel="stylesheet" href="pdf.css"/>
+</head>
+<body>
+	<div class='container'>
+		<h2>Exam Simulator (Offline)</h2>
+		
+<div id="studentPanel">
+    
+    <input
+        type="text"
+        id="studentName"
+        class="student-input"
+        placeholder="ENTER STUDENT NAME"
+        oninput="this.value=this.value.toUpperCase();">
+    <button
+        onclick="startSelectedExam()"
+        class="set-buttons">
+        Start Exam
+    </button>
+</div>
+		<div id="examSetPanel" class="set-buttons" style='display:none'>
+			<button onclick="loadSet(1)">SET-1</button>
+			<button onclick="loadSet(2)">SET-2</button>
+			<button onclick="loadSet(3)">SET-3</button>
+			<button onclick="loadSet(4)">SET-4</button>
+			<button onclick="loadSet(5)">SET-5</button>
+			<button onclick="loadSet(6)">SET-6</button>
+			<button onclick="loadSet(7)">SET-7</button>
+			<button onclick="loadSet(8)">SET-8</button>
+			<button onclick="loadSet(9)">SET-9</button>
+			<button onclick="loadSet(10)">SET-10</button>
+		</div>
+		<div id="messageArea"></div>
+		<div id='examArea' style='display:none'>
+		<div id="timer"></div>
+			<p id='score'></p>
+			<h3 id='question'></h3>
+			<div id='options'></div>
+			<div class="nav-buttons">
+				<button onclick="prevQuestion()">⬅ Previous</button>
+				<button onclick="nextQuestion()" style="background-color:green;">Next ➡</button>
+			</div>
+			<div id='explanation'></div>
+			<div>
+				<button onclick="reviewWrongQuestions()">Review Wrong Questions</button>
+				<button onclick="reviewSkippedQuestions()">Review Not Answered</button>
+				<button onclick="reviewMistakes()">Review All Mistakes</button>
+				<button onclick="endExam()" style="background:red;color:white;"> 🏁 End Exam </button>
+			</div>
+			<div id="reviewArea"></div>
+		</div>
+		<div id='ReportArea' style='display:none'></div>
+		<div class="menu">
+			<h2>Study Material</h2>
+			<a href="#" onclick="openPDF('pdf/nism-mutual-fund-study-notes.pdf')"> Study Notes for Mutual Fund Distributors Certification Examination </a>
+			<a href="#" onclick="openPDF('pdf/mfquestions.pdf')"> Mutual Fund Distributors Certification Examination - Sample Questions </a>
+			<a href="#" onclick="openPDF('pdf/DOC-20260919-WA0030.pdf')"> Workbook for NISM-Series-V-A: Mutual Fund Distributors Certification Examination </a>
+		</div>
+		<div class="viewer">
+			<iframe id="pdfFrame"></iframe>
+		</div>
+	
+		<div id="endExamModal" class="modal">
+			<div class="modal-content">
+				<h2>🏁 End Exam</h2>
+				<p>Are you sure you want to submit the exam?</p>
+				<div class="modal-buttons">
+					<button class="yes-btn"
+							onclick="confirmEndExam()">
+						✅ Submit
+					</button>
+					<button class="no-btn"
+							onclick="closeModal()">
+						❌ Continue Exam
+					</button>
+				</div>
+			</div>
+		</div>	
+	
+				
+<!-- Load questions first -->
+<script src="SET1.js"></script>
+<script src="SET2.js"></script>
+<script src="SET3.js"></script>
+<script src="SET4.js"></script>
+<script src="SET5.js"></script>
+<script src="SET6.js"></script>
+<script src="SET7.js"></script>
+<script src="SET8.js"></script>
+<script src="SET9.js"></script>
+<script src="SET10.js"></script>
+<!-- Then load your exam code -->
+<script src="exam.js"></script>
+</body></html>
