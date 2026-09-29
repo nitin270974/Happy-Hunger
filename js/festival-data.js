@@ -1,0 +1,1 @@
+window.HH_FESTIVALS = [{name:'Festive Specials', note:'Editable placeholder for seasonal and festival menus.'}];
