@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset='UTF-8'>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Simulator</title>
+<link rel="stylesheet" href="css/site.css"/>
+<link rel="stylesheet" href="css/pdf.css"/>
+</head>
+<body>
+	<div class='container'>
+		<h2>Exam Simulator (Offline)</h2>
+		<div id="studentPanel">
+		<input
+			type="text"
+			id="studentName"
+			class="student-input"
+			placeholder="ENTER STUDENT NAME"
+			oninput="this.value=this.value.toUpperCase();">
+		<button
+			onclick="startSelectedExam()"
+			class="set-buttons">
+			Start Exam
+		</button>
+	</div>
+	<button id="menuBtn" onclick="toggleMenu()" style="display:none;">☰ Sets</button>
+	<div id="examSetPanel" class="set-buttons">
+		<button onclick="loadSet(1)">SET-1</button>
+		<button onclick="loadSet(2)">SET-2</button>
+		<button onclick="loadSet(3)">SET-3</button>
+		<button onclick="loadSet(4)">SET-4</button>
+		<button onclick="loadSet(5)">SET-5</button>
+		<button onclick="loadSet(6)">SET-6</button>
+		<button onclick="loadSet(7)">SET-7</button>
+		<button onclick="loadSet(8)">SET-8</button>
+		<button onclick="loadSet(9)">SET-9</button>
+		<button onclick="loadSet(10)">SET-10</button>
+		<button onclick="loadSet(11)">SET-11</button>
+		<button onclick="loadSet(12)">SET-12</button>
+		<button onclick="loadSet(13)">SET-13</button>
+		<button onclick="loadSet(14)">SET-14</button>
+		<button onclick="loadSet(15)">SET-15</button>
+		<button onclick="loadSet(16)">SET-16</button>
+		<button onclick="loadSet(17)">SET-17</button>
+		<button onclick="loadSet(18)">SET-18</button>
+		<button onclick="loadSet(19)">SET-19</button>
+		<button onclick="loadSet(20)">SET-20</button>
+
+	</div>
+	<div id="messageArea"></div>
+	<div id='examArea' style='display:none'>
+    
+    <p id='score'></p>
+    <div class="exam-layout">
+        <div class="question-panel">
+	
+			
+			<div id="questionStatusBox" class="question-status-box"></div><div id="timer"></div>
+			<h3 id='question'></h3>
+			<div id='options'></div>
+			<div class="mark-review-box">
+				<label>
+				<input type="checkbox"
+					id="markForReview"
+					onchange="toggleMarkForReview()">
+				Mark for Review
+				</label>
+			</div>
+		<div class="nav-buttons">
+                <button onclick="prevQuestion()">⬅ Previous</button>
+                <button onclick="nextQuestion()" style="background-color:green;">Next ➡</button>
+            </div>
+            <div id='explanation'></div>
+            <div>
+                <button onclick="reviewWrongQuestions()">Review Wrong Questions</button>
+                <button onclick="reviewSkippedQuestions()">Review Not Answered</button>
+                <button onclick="reviewMistakes()">Review All Mistakes</button>
+                <button onclick="endExam()" style="background:red;color:white;"> 🏁 End Exam </button>
+            </div>
+            <div id="reviewArea"></div>
+        </div>
+        <div class="question-nav-panel">
+            <h3>Questions</h3>
+            <div id="questionNavigator"></div>
+        </div>
+    </div>
+</div>
+<div id='ReportArea' style='display:none'></div>
+		<div class="menu">
+			<h2>Study Material</h2>
+			<a href="#" onclick="openPDF('pdf/nism-mutual-fund-study-notes.pdf')"> Study Notes for Mutual Fund Distributors Certification Examination </a>
+			<a href="#" onclick="openPDF('pdf/mfquestions.pdf')"> Mutual Fund Distributors Certification Examination - Sample Questions </a>
+			<a href="#" onclick="openPDF('pdf/DOC-20260919-WA0030.pdf')"> Workbook for NISM-Series-V-A: Mutual Fund Distributors Certification Examination </a>
+		</div>
+		<div class="viewer">
+			<iframe id="pdfFrame"></iframe>
+		</div>
+	
+		<div id="endExamModal" class="modal">
+			<div class="modal-content">
+				<h2>🏁 End Exam</h2>
+				<p>Are you sure you want to submit the exam?</p>
+				<div class="modal-buttons">
+					<button class="yes-btn"
+							onclick="confirmEndExam()">
+						✅ Submit
+					</button>
+					<button class="no-btn"
+							onclick="closeModal()">
+						❌ Continue Exam
+					</button>
+				</div>
+			</div>
+		</div>	
+	
+				
+<!-- Load questions first -->
+<script src="js/SET1.js"></script>
+<script src="js/SET2.js"></script>
+<script src="js/SET3.js"></script>
+<script src="js/SET4.js"></script>
+<script src="js/SET5.js"></script>
+<script src="js/SET6.js"></script>
+<script src="js/SET7.js"></script>
+<script src="js/SET8.js"></script>
+<script src="js/SET9.js"></script>
+<script src="js/SET10.js"></script>
+<script src="js/SET11.js"></script>
+<script src="js/SET12.js"></script>
+<script src="js/SET13.js"></script>
+<script src="js/SET14.js"></script>
+<script src="js/SET15.js"></script>
+<script src="js/SET16.js"></script>
+<script src="js/SET17.js"></script>
+<script src="js/SET18.js"></script>
+<script src="js/SET19.js"></script>
+<script src="js/SET20.js"></script>
+<!-- Then load your exam code -->
+<script src="js/exam.js"></script>
+</body></html>
