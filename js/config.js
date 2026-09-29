@@ -1,8 +1,8 @@
 window.HH_CONFIG = {
-  brand: 'Happy Hunger', tagline: 'Homemade with Love, Served with Happiness',
-  whatsapp: '919999999999', phone: '+91 99999 99999', email: 'hello@happyhunger.in',
-  address: '[PLACEHOLDER FOR ADDRESS]', area: '[PLACEHOLDER]', city: '[PLACEHOLDER]',
-  coordinates: { lat: 19.2403, lng: 73.1305 },
+  brand: 'Happy Hunger Cloud Kitchen', tagline: 'Homemade with Love, Served with Happiness',
+  whatsapp: '919967366545', phone: '+919967366545', email: 'happyhungerblr@gmail.com',
+  address: 'L-704, Purva Highlands, Holiday Village Road, Mallasandra', area: 'Vajarahalli', city: 'Bengaluru',
+  coordinates: { lat: 12.854447467220307, lng: 77.54552186048969 },
   openingHours: { start: '08:00', end: '21:00' },
   canonicalBase: 'https://happyhunger.in/'
 };
