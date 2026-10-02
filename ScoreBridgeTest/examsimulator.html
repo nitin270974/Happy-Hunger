@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+        <title>
+            ScoreBridge - Practice Mock Tests
+        </title>
+        <link rel="stylesheet" href="css/style.css"/>
+        <link rel="stylesheet" href="css/pdf.css"/>
+    </head>
+    <body class="theme-grey">
+        <!-- ================= HEADER ================= -->
+        <header class="header">
+            <div class="logo-mark">
+                ⬡
+            </div>
+            <div>
+                <div class="brand">
+                    ScoreBridge
+                </div>
+                <div class="sub">
+                    Bridge the Gap Between Learning and Success.
+                    <span class="zf">
+                    </span>
+                </div>
+            </div>
+            <div class="menu" onclick="alert('Menu clicked')">
+                ☰
+            </div>
+        </header>
+        <!-- ================= USER ================= -->
+        <section class="userintro">
+            <div class="user-details">
+                <span class="usericon">
+                    <svg width="26" height="26" viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="4" fill="currentColor"/>
+                        <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7" fill="currentColor"/>
+                    </svg>
+                </span>
+                <span class="username" id="displayName"></span>
+            </div>
+        </section>
+        <!-- ================= TEST LIST ================= -->
+        <main id="testArea">
+            <section class="intro">
+                <div class="intro-title">
+                    <div class="icon">
+                        🎓
+                    </div>
+                    <span>Practice Mock Tests</span>
+                </div>
+                <p>
+                    Assess your understanding and prepare for certification with these mock tests related to NISM XXI-A Course - Free PMS Certification Course.
+                </p>
+            </section>
+            <section class="tests" id="tests">
+            </section>
+        </main>
+        <!-- ================= EXAM ================= -->
+        <section id="examSection">
+            <div id="messageArea">
+            </div>
+            <div id="examArea" style="display:none">
+                <div class="exam-layout">
+                    <!-- LEFT QUESTION PANEL -->
+                    <div class="question-panel">
+                        <!-- TEST TITLE + TIMER -->
+                        <div class="exam-top-row">
+                            <div id="selectedTestInfo">
+                            </div>
+                            <div id="timer">
+                            </div>
+                        </div>
+                        <!-- PROGRESS INFO -->
+                        <div id="progress-info">
+                            <span id="questionProgressText">Question 1 of 150</span>
+                            <span id="completedText">0% Completed</span>
+                        </div>
+                        <!-- PROGRESS BAR -->
+                        <div class="progress-container">
+                            <div id="examProgress">
+                            </div>
+                        </div>
+                        <!-- QUESTION -->
+                        <h3 id="question">
+                        </h3>
+                        <!-- OPTIONS -->
+                        <div id="options">
+                        </div>
+                        <!-- MARK FOR REVIEW -->
+                        <div class="mark-review-box">
+                            <label>
+                                <input type="checkbox" id="markForReview" onchange="toggleMarkForReview()">
+                                Mark for Review
+                            </label>
+                        </div>
+                        <!-- PREVIOUS / NEXT -->
+                        <div class="nav-buttons">
+                            <button onclick="prevQuestion()" id="prevBtn">
+                                ⬅ Previous
+                            </button>
+                            <button onclick="nextQuestion()" id="nextBtn">
+                                Next ➡
+                            </button>
+                        </div>
+                    </div>
+                    <!-- RIGHT QUESTION NAVIGATION -->
+                    <div class="question-nav-panel">
+                        <h3>
+                            Questions Navigator:
+                        </h3>
+                        <div id="questionNavigator">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+		
+        <!-- ================= REPORT ================= -->
+<section id="reportSection" style="display:none">
+    <div class="report-layout">
+        <div id="ReportArea" style="display:none">
+        </div>
+        <div class="review-container">
+            <!-- REVIEW BUTTONS -->
+            <div class="review-buttons">
+                <button onclick="CorrectAnswer()">
+                    Correct Answers 
+                </button>
+                <button onclick="reviewWrongQuestions()">
+                    Wrong Answers 
+                </button>
+                <button onclick="reviewSkippedQuestions()">
+                    Skipped Questions
+                </button>
+                <button onclick="reviewMistakes()">
+                    Review All Questions
+                </button>
+                <button onclick="showCorrectAnswers()">
+                    Answer Sheet
+                </button>
+            </div>
+            <!-- REVIEW OUTPUT -->
+            <div id="reviewArea">
+            </div>
+        </div>
+    </div>
+</section>
+        <!-- ================= STUDY MATERIAL ================= -->
+        <section class="study-material">
+            <h2>
+                Study Material
+            </h2>
+            <a href="#" onclick="openPDF('pdf/nism-mutual-fund-study-notes.pdf')">Study Notes for Mutual Fund Distributors Certification Examination</a>
+            <a href="#" onclick="openPDF('pdf/mfquestions.pdf')">Mutual Fund Distributors Certification Examination - Sample Questions</a>
+            <a href="#" onclick="openPDF('pdf/DOC-20260919-WA0030.pdf')">Workbook for NISM-Series-V-A: Mutual Fund Distributors Certification Examination</a>
+        </section>
+        <!-- ================= PDF VIEWER ================= -->
+        <section class="viewer">
+            <iframe id="pdfFrame" title="Study Material">
+            </iframe>
+        </section>
+        <!-- ================= END EXAM MODAL ================= -->
+        <div id="endExamModal" class="modal">
+            <div class="modal-content">
+                <h2>
+                    🏁 End Exam
+                </h2>
+                <p>
+                    Are you sure you want to submit the exam?
+                </p>
+                <div class="modal-buttons">
+                    <button class="yes-btn" onclick="confirmEndExam()">
+                        ✅ Submit
+                    </button>
+                    <button class="no-btn" onclick="closeModal()">
+                        ❌ Continue Exam
+                    </button>
+                </div>
+            </div>
+        </div>
+        <!-- ================= CHAT ================= -->
+        <div class="chat" onclick="alert('Chat support')">
+            ▢
+        </div>
+        <!-- ================= BOTTOM NAVIGATION ================= -->
+        <nav class="nav" id="navigation">
+            <div class="nav-item active" onclick="navClick('Courses')">
+                <span class="ni">🎓</span>Courses
+            </div>
+            <div class="nav-item" onclick="navClick('Mock Tests')">
+                <span class="ni">📋</span>Mock Tests
+            </div>
+            <div class="nav-item" onclick="navClick('My Learning')">
+                <span class="ni">📖</span>My Learning
+            </div>
+            <div class="nav-item" onclick="navClick('Blog')">
+                <span class="ni">▤</span>Blog
+            </div>
+        </nav>
+        <script>
+            const tests = [ { setNo: 2, title: "NISM series VA - Mid length mock test", duration: 60, questions: 50, minMarks: 60 }, { setNo: 1, title: "Mutual Fund Mock Test - 1", duration: 60, questions: 50, minMarks: 60 }, { setNo: 3, title: "Mutual Fund Mock Test - 3", duration: 60, questions: 50, minMarks: 60 }, { setNo: 4, title: "Mutual Fund Mock Test - 4", duration: 60, questions: 50, minMarks: 60 }, { setNo: 5, title: "Mutual Fund Mock Test - 5", duration: 60, questions: 50, minMarks: 60 } ]; const testsBox=document.getElementById("tests"); tests.forEach(t=>{ testsBox.insertAdjacentHTML("beforeend",`
+            <article class="card">
+                <h2>
+                    ${t.title} - Mock Test ${t.setNo}
+                </h2>
+                <div class="course">
+                    Portfolio Management Services
+                </div>
+                <div class="meta">
+                    <span class="pill">◷ &nbsp;${t.duration} min</span>
+                    <span class="pill">✓ &nbsp;${t.questions} Qs</span>
+                    <span class="pill">🎓 &nbsp;Pass: ${t.minMarks}%</span>
+                </div>
+                <button class="start" onclick="startTest(${t.setNo})">
+                    ▷ &nbsp; Start Test
+                </button>
+            </article>
+            `); }); function startTest(n){ alert("Starting NISM XXI A for PMS - Mock Test " + n); } function navClick(name){ document.querySelectorAll(".nav-item").forEach(x=>x.classList.remove("active")); [...document.querySelectorAll(".nav-item")].find(x=>x.innerText.includes(name))?.classList.add("active"); } function updateTime(){ const d=new Date(); document.getElementById("time").textContent = String(d.getHours()).padStart(2,"0")+":"+String(d.getMinutes()).padStart(2,"0"); } /* updateTime(); setInterval(updateTime,30000); */
+        </script>
+        <script>
+            document.addEventListener("DOMContentLoaded", function() { const name = sessionStorage.getItem("examUserName"); const mobile = sessionStorage.getItem("examUserMobile"); document.getElementById("displayName").innerText = name || ""; /* document.getElementById("displayMobile").innerText = mobile || "";*/ });
+        </script>
+        <!-- Load questions first -->
+        <script src="js/SET1.js">
+        </script>
+        <script src="js/SET2.js">
+        </script>
+        <script src="js/SET3.js">
+        </script>
+        <script src="js/SET4.js">
+        </script>
+        <script src="js/SET5.js">
+        </script>
+        <script src="js/SET6.js">
+        </script>
+        <script src="js/SET7.js">
+        </script>
+        <script src="js/SET8.js">
+        </script>
+        <script src="js/SET9.js">
+        </script>
+        <script src="js/SET10.js">
+        </script>
+        <script src="js/SET11.js">
+        </script>
+        <script src="js/SET12.js">
+        </script>
+        <!-- Then load your exam code -->
+        <script src="js/myscripts.js">
+        </script>
+    </body>
+</html>

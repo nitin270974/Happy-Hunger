@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #caf0f8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .signup-box {
+            width: 380px;
+            background: white;
+            padding: 35px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,119,182,.20);
+        }
+        .signup-box h1 {
+            margin: 0;
+            color: #023047;
+            text-align: center;
+        }
+        .signup-box .subtitle {
+            text-align: center;
+            color: #666;
+            margin: 8px 0 30px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 7px;
+            color: #023047;
+            font-weight: 600;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 13px;
+            font-size: 16px;
+            border: 2px solid #90e0ef;
+            border-radius: 8px;
+            outline: none;
+        }
+        .form-group input:focus {
+            border-color: #0077b6;
+        }
+        #submitBtn {
+            width: 100%;
+            padding: 13px;
+            background: #0077b6;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 17px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        #submitBtn:hover {
+            background: #023e8a;
+        }
+        #message {
+            margin-top: 15px;
+            text-align: center;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+<div class="signup-box">
+    <h1>Welcome</h1>
+    <div class="subtitle">
+        Sign in to your account
+    </div>
+    <div class="form-group">
+        <label for="mobileNumber">
+            Mobile Number
+        </label>
+        <input
+            type="tel"
+            id="mobileNumber"
+            maxlength="10"
+            inputmode="numeric"
+            placeholder="Enter Mobile Number">
+    </div>
+    <div class="form-group">
+        <label for="userName">
+            Name
+        </label>
+        <input
+            type="text"
+            id="userName"
+            placeholder="Enter Your Name">
+    </div>
+    <button id="submitBtn" onclick="submitUser()">
+        Submit
+    </button>
+    <div id="message"></div>
+</div>
+<script src="js/SignUp.js"></script>
+</body>
+</html>

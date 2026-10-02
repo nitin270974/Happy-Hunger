@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Color Picker</title>
+
+    <style>
+        body {
+            font-family: "Segoe UI", Arial, sans-serif;
+            background: #f1f5f9;
+            text-align: center;
+            padding: 40px;
+        }
+
+        .color-picker-box {
+            display: inline-block;
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            box-shadow: 0 3px 12px rgba(0,0,0,.15);
+        }
+
+        #colorPicker {
+            width: 80px;
+            height: 50px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #colorValue {
+            width: 110px;
+            padding: 8px;
+            margin-left: 8px;
+            font-family: Consolas, monospace;
+            font-size: 16px;
+            text-align: center;
+        }
+
+        #colorPreview {
+            width: 200px;
+            height: 70px;
+            margin: 20px auto;
+            background: #0077b6;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+        }
+
+        button {
+            padding: 9px 15px;
+            border: none;
+            border-radius: 6px;
+            background: #0077b6;
+            color: white;
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="color-picker-box">
+
+        <h2>Color Picker</h2>
+
+        <input
+            type="color"
+            id="colorPicker"
+            value="#0077b6"
+            oninput="updateColor()">
+
+        <input
+            type="text"
+            id="colorValue"
+            value="#0077b6"
+            readonly>
+
+        <div id="colorPreview"></div>
+
+        <button onclick="copyColor()">
+            Copy Color
+        </button>
+
+    </div>
+
+
+    <script>
+
+        function updateColor()
+        {
+            const color =
+                document.getElementById("colorPicker").value;
+
+            document.getElementById("colorValue").value =
+                color;
+
+            document.getElementById("colorPreview").style.backgroundColor =
+                color;
+        }
+
+
+        function copyColor()
+        {
+            const color =
+                document.getElementById("colorValue");
+
+            color.select();
+
+            document.execCommand("copy");
+        }
+
+    </script>
+
+</body>
+</html>
